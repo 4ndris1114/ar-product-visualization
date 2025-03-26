@@ -3,12 +3,14 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>A-FRAME 360 Image and geometry</title>
+    <title>Super cool car</title>
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
   </head>
   <body>
     <a-scene renderer="colorManagement: true;">
-        
+        <a-entity geometry="primitive: box" gltf-model="helipad.glb" position="0 1 0" rotation="0 0 0"></a-entity>
+        <a-entity geometry="primitive: box" gltf-model="porsche911.glb" position="0 1 0"></a-entity>
+
     </a-scene>
   </body>
 </html>
