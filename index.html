@@ -23,7 +23,9 @@
 
       <!-- Camera rig for user's viewpoint -->
       <a-entity id="cameraRig" position="0 1 0">
-        <a-camera wasd-controls="acceleration: 50" look-controls="pointerLockEnabled: true; sensitivity: 0.5"></a-camera>
+        <a-camera wasd-controls="acceleration: 50" look-controls="pointerLockEnabled: true; sensitivity: 0.5">
+          <a-entity tap-controller="selectOnUp: true"></a-entity>
+        </a-camera>
       </a-entity>
     </a-scene>
   </div>
