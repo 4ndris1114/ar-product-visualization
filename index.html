@@ -22,8 +22,8 @@
       <a-entity geometry="primitive: box" gltf-model="porsche911.glb" position="0 1 0"></a-entity>
 
       <!-- Camera rig for user's viewpoint -->
-      <a-entity id="cameraRig" position="0 1 0">
-        <a-camera fly-controls="movementSpeed: 50; rollSpeed: 0.5;"></a-camera>
+      <a-entity id="cameraRig" position="0 1 5">
+        <a-camera id="camera"></a-camera>
       </a-entity>
     </a-scene>
   </div>
@@ -107,6 +107,46 @@
       };
       session.requestAnimationFrame(onXRFrame);
     }
+
+    AFRAME.registerComponent('tap-move', {
+      init: function () {
+        const cameraRig = document.getElementById("cameraRig");
+        const sceneEl = document.querySelector("a-scene");
+
+        sceneEl.addEventListener("click", function (event) {
+          if (!event.detail.intersection) return;
+
+          // Get tap position
+          const tapPosition = event.detail.intersection.point;
+
+          // Smooth move cameraRig to tapped position
+          const duration = 1000; // 1 sec
+          const start = { x: cameraRig.object3D.position.x, z: cameraRig.object3D.position.z };
+          const end = { x: tapPosition.x, z: tapPosition.z };
+          let startTime = null;
+
+          function animateMove(timestamp) {
+            if (!startTime) startTime = timestamp;
+            let progress = (timestamp - startTime) / duration;
+            if (progress > 1) progress = 1;
+
+            cameraRig.object3D.position.lerpVectors(
+              new THREE.Vector3(start.x, 1, start.z),
+              new THREE.Vector3(end.x, 1, end.z),
+              progress
+            );
+
+            if (progress < 1) {
+              requestAnimationFrame(animateMove);
+            }
+          }
+
+          requestAnimationFrame(animateMove);
+        });
+      }
+    });
+
+    document.getElementById("scene").setAttribute("tap-move", ""); // Attach movement logic
 
     document.getElementById("startXR").addEventListener("click", activateXR);
     document.getElementById("showHelipad").addEventListener("click", () => {
