@@ -63,6 +63,7 @@
       let rigby;
       gltfLoader.load("rigby.glb", function (glb) {
         rigby = glb.scene;
+        rigby.scale.set(0.5, 0.5, 0.5);
       });
 
       session.addEventListener("select", () => {
