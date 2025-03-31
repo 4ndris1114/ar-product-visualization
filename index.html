@@ -19,9 +19,8 @@
   <div id="sceneContainer">
     <a-scene renderer="colorManagement: true;">
       <a-entity geometry="primitive: box" gltf-model="helipad.glb" position="0 1 0" rotation="0 0 0"></a-entity>
-      <a-entity geometry="primitive: box" gltf-model="rigby.glb" position="0 1.6 0" rotation="0 0 0">
-        <a-animation attribute="position" to="0 2 0" direction="alternate" dur="1000" easing="ease-in-out" repeat="indefinite" fill="forwards"></a-animation>
-      </a-entity>
+      <a-entity geometry="primitive: box" gltf-model="rigby.glb" position="0 1.55 0" rotation="0 0 0"
+      animation="property: rotation; to: 0 -360 0; loop: true; dur: 10000; easing: linear"></a-entity>
       <a-entity geometry="primitive: box" gltf-model="porsche911.glb" position="0 1 0"
       animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear"></a-entity>
 
